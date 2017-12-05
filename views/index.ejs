@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  </head>
+  <body>
+
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <ul id="board">
+        <% boards.forEach(function (item) { %>
+            <li>제목 : <%= item.title%> / 작성일: <%= item.create_date%></li>
+        <% })%>
+    </ul>
+
+    <script>
+        var socket = io('//localhost:3002');
+        socket.on('socketToMe', function (data) {
+            var data_json = JSON.parse(data);
+            console.log(data);
+            $('#board').append("<li> 제목 : "+ data_json.title +" / 작성일 : " + data_json.create_date+"</li>")
+        })
+    </script>
+
+  </body>
+</html>
