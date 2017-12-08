@@ -31,6 +31,7 @@ router.post('/setTest', function(req, res, next) {
     var json_obj = JSON.stringify(data_arr);
     conn.query("INSERT INTO test_board (title, content, create_date) VALUES ('"+title+"', '"+content+"', '"+create_date+"')", function (err, rows, fields) {
        if(!err){
+           console.log("Insert data : " + rows);
            res.io.emit("socketToMe", json_obj);
            res.send({result : "SUCCESS"});
        }

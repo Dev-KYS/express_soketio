@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 
             data = JSON.stringify(rows);
             console.log(data);
-            res.render('index', { title: 'Express', boards: rows });
+            res.render('index', { title: 'Express', boards: data });
         }
     });
 
